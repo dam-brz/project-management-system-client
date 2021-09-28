@@ -3,5 +3,46 @@
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
+}
+
+.fa.fa-edit {
+  color: #18a2b9;
+}
+
+.list-group-item.delete {
+  cursor: -webkit-grab;
+  color: rgb(255, 0, 0);
+}
+
+.list-group-item.update {
+  cursor: -webkit-grab;
+  color: rgb(137, 192, 137);
+}
+
+.list-group-item.board {
+  cursor: -webkit-grab;
+  color: rgb(112, 172, 241);
+}
+
+.list-group-item.delete:hover {
+  cursor: -webkit-grab;
+  background-color: rgb(255, 75, 75);
+  color: rgb(0, 0, 0);
+}
+
+.list-group-item.update:hover {
+  cursor: -webkit-grab;
+  background-color: rgb(75, 192, 137);
+  color: rgb(0, 0, 0);
+}
+
+.list-group-item.board:hover {
+  cursor: -webkit-grab;
+  background-color: rgb(112, 172, 241);
+  color: rgb(0, 0, 0);
+}
+
+.fa.fa-minus-circle {
+  color: red;
 }
