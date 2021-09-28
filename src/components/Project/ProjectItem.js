@@ -17,17 +17,17 @@ export default class ProjectItem extends Component {
                             <ul className="list-group">
                                 <a href="#">
                                     <li className="list-group-item board">
-                                        <i className="fa fa-flag-checkered pr-1">Project Board </i>
+                                        <i className="bi bi-kanban">Project Board </i>
                                     </li>
                                 </a>
                                 <a href="#">
                                     <li className="list-group-item update">
-                                        <i className="fa fa-edit pr-1">Update Project Info</i>
+                                        <i className="bi bi-pencil-square">Update Project Info</i>
                                     </li>
                                 </a>
                                 <a href="">
                                     <li className="list-group-item delete">
-                                        <i className="fa fa-minus-circle pr-1">Delete Project</i>
+                                        <i className="bi bi-trash">Delete Project</i>
                                     </li>
                                 </a>
                             </ul>
