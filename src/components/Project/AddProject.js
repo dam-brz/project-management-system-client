@@ -12,7 +12,8 @@ class AddProject extends Component {
             "projectIdentifier": "",
             "description": "",
             "startDate": "",
-            "endDate": ""
+            "endDate": "",
+            "errors": {}
         };
         
         this.onChange = this.onChange.bind(this);
@@ -22,6 +23,13 @@ class AddProject extends Component {
     onChange(e) {
         this.setState({ [e.target.name] : e.target.value})
     };
+
+    static getDerivedStateFromProps(props, state) {
+        if (state.errors) {
+             return { errors: props.errors }
+        }
+    }
+
 
     onSubmit(e) {
         e.preventDefault();
@@ -36,6 +44,7 @@ class AddProject extends Component {
     };
 
     render() {
+        const {errors} = this.state;
         return (
             <div className="project">
                 <div className="container">
@@ -53,7 +62,7 @@ class AddProject extends Component {
                                         value={this.state.projectName}
                                         onChange={this.onChange}
                                     />
-                                        
+                                    <p>{errors.projectName}</p> 
                                 </div>
                                 <div className="form-group mb-2">
                                     <input 
@@ -62,7 +71,9 @@ class AddProject extends Component {
                                         placeholder="Unique Project ID" 
                                         name="projectIdentifier" 
                                         value={this.state.projectIdentifier} 
-                                        onChange={this.onChange}/>
+                                        onChange={this.onChange}
+                                    />
+                                    <p>{errors.projectIdentifier}</p> 
                                 </div>
                                 <div className="form-group mb-2">
                                     <textarea 
@@ -70,7 +81,9 @@ class AddProject extends Component {
                                         placeholder="Project Description" 
                                         name="description" 
                                         value={this.state.description}
-                                        onChange={this.onChange} />
+                                        onChange={this.onChange} 
+                                    />
+                                    <p>{errors.description}</p> 
                                 </div>
                                 <div className="form-group my-4">
                                     <h6>Start Date</h6>
@@ -106,7 +119,12 @@ class AddProject extends Component {
 }
 
 AddProject.protoTypes = {
-    createProject: PropTypes.func.isRequired
-}
+    createProject: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+};
 
-export default connect(null, {createProject})(AddProject)
+const mapStateToprops = state => ({
+    errors: state.errors
+});
+
+export default connect(mapStateToprops, {createProject})(AddProject);
