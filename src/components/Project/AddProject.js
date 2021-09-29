@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import { connect } from 'react-redux';
+import { createProject } from '../../actions/projectActions';
 
-export default class AddProject extends Component {
+class AddProject extends Component {
     constructor() {
         super();
 
@@ -29,6 +32,7 @@ export default class AddProject extends Component {
             "startDate": this.state.startDate,
             "endDate": this.state.endDate
         }
+        this.props.createProject(newProject, this.props.history)
     };
 
     render() {
@@ -71,7 +75,7 @@ export default class AddProject extends Component {
                                 <div className="form-group my-4">
                                     <h6>Start Date</h6>
                                     <input 
-                                        type="date" 
+                                        type="date"
                                         className="form-control form-control-lg" 
                                         name="start_date" 
                                         name="startDate" 
@@ -82,7 +86,7 @@ export default class AddProject extends Component {
                                 <div className="form-group my-2">
                                     <h6>Estimated End Date</h6>
                                     <input 
-                                        type="date" 
+                                        type="date"
                                         className="form-control form-control-lg" 
                                         name="end_date" 
                                         name="endDate" 
@@ -100,3 +104,9 @@ export default class AddProject extends Component {
         )
     }
 }
+
+AddProject.protoTypes = {
+    createProject: PropTypes.func.isRequired
+}
+
+export default connect(null, {createProject})(AddProject)
