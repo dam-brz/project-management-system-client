@@ -30,3 +30,16 @@ export const getProject = (id, history) => async dispatch => {
         payload: res.data
     });
 };
+
+export const updateProject = (id, project, history) => async dispatch => {
+    try {
+        const UPDATE_PROJECT_URL = PROJECTS_URL + "/" + id;
+        const res = await axios.put(UPDATE_PROJECT_URL, project);
+        history.push("/dashboard")
+    } catch (error) {
+        dispatch({
+            type:GET_ERRORS,
+            peyload:error.response.data
+        });
+    }
+};
