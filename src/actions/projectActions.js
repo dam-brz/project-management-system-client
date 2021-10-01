@@ -1,11 +1,9 @@
 import axios from "axios";
 import { GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./type";
 
-const PROJECTS_URL = "http://localhost:8080/api/projects";
-
 export const createProject = (project, history) => async dispatch => {
     try {
-        const res = await axios.post(PROJECTS_URL, project);
+        const res = await axios.post("http://localhost:8080/api/projects", project);
         history.push("/dashboard")
         dispatch({
             type:GET_ERRORS,
@@ -20,7 +18,7 @@ export const createProject = (project, history) => async dispatch => {
 };
 
 export const getProjects = () => async dispatch => {
-    const res = await axios.get(PROJECTS_URL);
+    const res = await axios.get("http://localhost:8080/api/projects");
     dispatch({
         type: GET_PROJECTS,
         payload: res.data
@@ -29,7 +27,7 @@ export const getProjects = () => async dispatch => {
 
 export const getProject = (id, history) => async dispatch => {
     try {
-        const res = await axios.get(PROJECTS_URL + "/" + id);
+        const res = await axios.get(`http://localhost:8080/api/projects/${id}`);
         dispatch({
             type: GET_PROJECT,
             payload: res.data
@@ -42,8 +40,7 @@ export const getProject = (id, history) => async dispatch => {
 
 export const updateProject = (id, project, history) => async dispatch => {
     try {
-        const UPDATE_PROJECT_URL = PROJECTS_URL + "/" + id;
-        const res = await axios.put(UPDATE_PROJECT_URL, project);
+        const res = await axios.put(`http://localhost:8080/api/projects/${id}`);
         history.push("/dashboard")
         dispatch({
             type:GET_ERRORS,
