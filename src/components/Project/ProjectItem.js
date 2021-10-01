@@ -16,8 +16,8 @@ export default class ProjectItem extends Component {
                             <p>{project.projectIdentifier}</p>
                         </div>
                         <div className="col-md-4 d-none d-lg-block">
-                            <ul className="list-group">
-                                <Link href="#">
+                            <ul className="list-group">  
+                                 <Link to={`/dashboard`}>
                                     <li className="list-group-item board">
                                         <i className="bi bi-kanban">Project Board </i>
                                     </li>
@@ -27,11 +27,11 @@ export default class ProjectItem extends Component {
                                         <i className="bi bi-pencil-square">Update Project Info</i>
                                     </li>
                                 </Link>
-                                <a href="">
+                                <Link to={`/dashboard`}>
                                     <li className="list-group-item delete">
                                         <i className="bi bi-trash">Delete Project</i>
                                     </li>
-                                </a>
+                                </Link>
                             </ul>
                         </div>
                     </div>
