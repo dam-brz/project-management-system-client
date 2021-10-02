@@ -40,7 +40,7 @@ export const getProject = (projectIdentifier, history) => async dispatch => {
 
 export const updateProject = (projectIdentifier, project, history) => async dispatch => {
     try {
-        const res = await axios.put(`http://localhost:8080/api/projects/${projectIdentifier}`);
+        const res = await axios.put(`http://localhost:8080/api/projects/${projectIdentifier}`, project);
         history.push("/dashboard")
         dispatch({
             type:GET_ERRORS,
