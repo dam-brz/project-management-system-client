@@ -55,9 +55,11 @@ export const updateProject = (projectIdentifier, project, history) => async disp
 };
 
 export const deleteProject = (projectIdentifier) => async dispatch => {
-    const res = await axios.delete(`http://localhost:8080/api/projects/${projectIdentifier}`);
+    if (window.confirm("Are you sure? This will delete the project and all the data related to it.")) {
+        const res = await axios.delete(`http://localhost:8080/api/projects/${projectIdentifier}`);
     dispatch({
         type:DELETE_PROJECT,
         peyload: projectIdentifier
     });
+    }
 };
