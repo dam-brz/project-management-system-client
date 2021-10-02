@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./type";
+import { DELETE_PROJECT, GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./type";
 
 export const createProject = (project, history) => async dispatch => {
     try {
@@ -25,9 +25,9 @@ export const getProjects = () => async dispatch => {
     });
 };
 
-export const getProject = (id, history) => async dispatch => {
+export const getProject = (projectIdentifier, history) => async dispatch => {
     try {
-        const res = await axios.get(`http://localhost:8080/api/projects/${id}`);
+        const res = await axios.get(`http://localhost:8080/api/projects/${projectIdentifier}`);
         dispatch({
             type: GET_PROJECT,
             payload: res.data
@@ -38,9 +38,9 @@ export const getProject = (id, history) => async dispatch => {
     
 };
 
-export const updateProject = (id, project, history) => async dispatch => {
+export const updateProject = (projectIdentifier, project, history) => async dispatch => {
     try {
-        const res = await axios.put(`http://localhost:8080/api/projects/${id}`);
+        const res = await axios.put(`http://localhost:8080/api/projects/${projectIdentifier}`);
         history.push("/dashboard")
         dispatch({
             type:GET_ERRORS,
@@ -52,4 +52,12 @@ export const updateProject = (id, project, history) => async dispatch => {
             peyload:error.response.data
         });
     }
+};
+
+export const deleteProject = (projectIdentifier) => async dispatch => {
+    const res = await axios.delete(`http://localhost:8080/api/projects/${projectIdentifier}`);
+    dispatch({
+        type:DELETE_PROJECT,
+        peyload: projectIdentifier
+    });
 };
