@@ -25,7 +25,7 @@ class ProjectItem extends Component {
                         </div>
                         <div className="col-md-4 d-none d-lg-block">
                             <ul className="list-group">  
-                                 <Link to={`/dashboard`}>
+                                 <Link to={`/projectBoard/${project.projectIdentifier}`}>
                                     <li className="list-group-item board">
                                         <i className="bi bi-kanban">Project Board </i>
                                     </li>
