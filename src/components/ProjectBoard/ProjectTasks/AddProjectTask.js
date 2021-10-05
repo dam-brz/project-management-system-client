@@ -1,9 +1,55 @@
+import classnames from "classnames";
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addProjectTask } from '../../../actions/backlogActions';
+import PropTypes from "prop-types"
 
 class AddProjectTask extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            "summary": "",
+            "acceptanceCriteria": "",
+            "status": "",
+            "priority": "",
+            "dueDate": "",
+            "errors": {}
+        };
+
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    onChange(e) {
+        this.setState({ [e.target.name] : e.target.value})
+    };
+
+    static getDerivedStateFromProps(props, state) {
+        if (state.errors) {
+             return { errors: props.errors }
+        }
+    }
+
+    onSubmit(e) {
+        e.preventDefault();
+        const projectIdentifier = this.props.match.params.projectIdentifier;
+        const task = {
+            "summary": this.state.summary,
+            "acceptanceCriteria": this.state.acceptanceCriteria,
+            "status": this.state.status,
+            "priority": this.state.priority,
+            "dueDate": this.state.dueDate
+        };
+
+        this.props.addProjectTask(projectIdentifier, task, this.props.history);
+    };
+
     render() {
         const {projectIdentifier} = this.props.match.params;
+        const {errors} = this.state;
         return (
             <div className="add-PBI">
                 <div className="container">
@@ -14,19 +60,51 @@ class AddProjectTask extends Component {
                             </Link>
                             <h4 className="display-4 text-center">Add Project Task</h4>
                             <p className="lead text-center">Project Name + Project Code</p>
-                            <form>
-                                <div className="form-group">
-                                    <input type="text" className="form-control form-control-lg" name="summary" placeholder="Project Task summary" />
+                            <form onSubmit={this.onSubmit}>
+                                <div className="form-group mb-2">
+                                    <input 
+                                        type="text" 
+                                        className={classnames("form-control form-control-lg ", {
+                                            "is-invalid": errors.summary
+                                        })} 
+                                        name="summary" 
+                                        placeholder="Project Task summary" 
+                                        value={this.state.summary}
+                                        onChange={this.onChange} 
+                                    />
+                                    {errors.summary && (
+                                        <div className="invalid-feedback">
+                                            {errors.summary}
+                                        </div>
+                                    )}
                                 </div>
-                                <div className="form-group">
-                                    <textarea className="form-control form-control-lg" placeholder="Acceptance Criteria" name="acceptanceCriteria"></textarea>
+                                <div className="form-group mb-2">
+                                    <textarea 
+                                        className="form-control form-control-lg" 
+                                        placeholder="Acceptance Criteria" 
+                                        name="acceptanceCriteria"
+                                        value={this.state.acceptanceCriteria}
+                                        onChange={this.onChange}
+                                    >
+                                    </textarea>
                                 </div>
-                                <h6>Due Date</h6>
-                                <div className="form-group">
-                                    <input type="date" className="form-control form-control-lg" name="dueDate" />
+                                <div className="form-group mb-2">
+                                    <h6>Due Date</h6>
+                                    <input 
+                                        type="date"
+                                        className="form-control form-control-lg"
+                                        name="dueDate"
+                                        value={this.state.dueDate}
+                                        onChange={this.onChange} 
+                                    />
                                 </div>
-                                <div className="form-group">
-                                    <select className="form-control form-control-lg" name="priority">
+                                <div className="form-group mb-2">
+                                    <select 
+                                        className="form-control form-control-lg" 
+                                        name="priority" 
+                                        value={this.state.priority}
+                                        onChange={this.onChange} 
+                                    >
                                         <option value={0}>Select Priority</option>
                                         <option value={1}>High</option>
                                         <option value={2}>Medium</option>
@@ -34,8 +112,13 @@ class AddProjectTask extends Component {
                                     </select>
                                 </div>
 
-                                <div className="form-group">
-                                    <select className="form-control form-control-lg" name="status">
+                                <div className="form-group mb-2">
+                                    <select 
+                                        className="form-control form-control-lg" 
+                                        name="status" 
+                                        value={this.state.status}
+                                        onChange={this.onChange} 
+                                    >
                                         <option value="">Select Status</option>
                                         <option value="TO_DO">TO DO</option>
                                         <option value="IN_PROGRESS">IN PROGRESS</option>
@@ -53,4 +136,13 @@ class AddProjectTask extends Component {
     }
 }
 
-export default AddProjectTask;
+AddProjectTask.protoTypes = {
+    addProjectTask: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
+};
+
+const mapStateToprops = state => ({
+    errors: state.errors
+});
+
+export default connect(mapStateToprops, {addProjectTask}) (AddProjectTask);
