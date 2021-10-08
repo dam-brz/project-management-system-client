@@ -26,7 +26,10 @@ export const getProjectBacklog = (projectIdentifier, history) => async dispatch 
             payload: res.data
         });
     } catch (error) {
-        history.push("/dashboard")
+        dispatch({
+            type: GET_ERRORS,
+            peyload: error.response.data
+        });
     }
     
 };
