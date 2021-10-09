@@ -79,7 +79,7 @@ class UpdateProjectTask extends Component {
                                         })}
                                         name="summary" 
                                         placeholder="Project Task summary" 
-                                        value={this.state.summary}
+                                        value={this.state.summary || ""}
                                         onChange={this.onChange}
                                     />
                                     {errors.summary && (
@@ -93,7 +93,7 @@ class UpdateProjectTask extends Component {
                                         className="form-control form-control-lg" 
                                         placeholder="Acceptance Criteria" 
                                         name="acceptanceCriteria"
-                                        value={this.state.acceptanceCriteria}
+                                        value={this.state.acceptanceCriteria || ""}
                                         onChange={this.onChange}
                                     >
                                     </textarea>
@@ -104,12 +104,12 @@ class UpdateProjectTask extends Component {
                                         type="date" 
                                         className="form-control form-control-lg" 
                                         name="dueDate"
-                                        value={this.state.dueDate} 
+                                        value={this.state.dueDate || ""} 
                                         onChange={this.onChange}
                                     />
                                 </div>
                                 <div className="form-group mb-2">
-                                    <select className="form-control form-control-lg" name="priority" value={this.state.priority} onChange={this.onChange}>
+                                    <select className="form-control form-control-lg" name="priority" value={this.state.priority || ""} onChange={this.onChange}>
                                         <option value={0}>Select Priority</option>
                                         <option value={1}>High</option>
                                         <option value={2}>Medium</option>
@@ -118,7 +118,7 @@ class UpdateProjectTask extends Component {
                                 </div>
 
                                 <div className="form-group mb-2">
-                                    <select className="form-control form-control-lg" name="status" value={this.state.status} onChange={this.onChange}>
+                                    <select className="form-control form-control-lg" name="status" value={this.state.status || ""} onChange={this.onChange}>
                                         <option value="">Select Status</option>
                                         <option value="TO_DO">TO DO</option>
                                         <option value="IN_PROGRESS">IN PROGRESS</option>
