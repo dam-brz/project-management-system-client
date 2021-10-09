@@ -39,27 +39,33 @@ class ProjectBoard extends Component {
                     )
                 } else {
                     return(
-                        <div className="alert alert-info text-center">No Project Tasks on this board</div>
+                        <div className="container">
+                            <Link to={`/addProjectTask/${projectIdentifier}`} className="btn btn-primary mb-3">
+                                <i className="fas fa-plus-circle"> Create Project Task</i>
+                            </Link>
+                            <br />
+                            <hr />
+                            <div className="alert alert-info text-center">No Project Tasks on this board</div>
+                        </div> 
                     )
                 }
             } else {
                 return(
-                    <Backlog project_tasks_prop={project_tasks}/>
+                    <div className="container">
+                            <Link to={`/addProjectTask/${projectIdentifier}`} className="btn btn-primary mb-3">
+                                <i className="fas fa-plus-circle"> Create Project Task</i>
+                            </Link>
+                            <br />
+                            <hr />
+                            <Backlog project_tasks_prop={project_tasks}/>
+                        </div> 
+                    
                 )
             }
         };
 
-        boardContent = boardAlgorithm(errors, project_tasks);
-
         return (
-            <div className="container">
-                <Link to={`/addProjectTask/${projectIdentifier}`} className="btn btn-primary mb-3">
-                    <i className="fas fa-plus-circle"> Create Project Task</i>
-                </Link>
-                <br />
-                <hr />
-                {boardContent}
-            </div>
+            boardAlgorithm(errors, project_tasks)
         )
     }
 }
