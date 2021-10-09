@@ -42,10 +42,10 @@ export const getProjectTask = (projectIdentifier, projectSequence, history) => a
             payload: res.data
         });
     } catch (error) {
-        // dispatch({
-        //     type: GET_ERRORS,
-        //     peyload: error.response.data
-        // });
+        dispatch({
+            type: GET_ERRORS,
+            peyload: error.response.data
+        });
         history.push(`/projectBoard/${projectIdentifier}`);
     }
     
