@@ -45,7 +45,7 @@ class UpdateProjectTask extends Component {
 
         const projectIdentifier = this.props.project_task.projectIdentifier;
         const projectSequence = this.props.project_task.projectSequence;
-        const history = this.props.project_task.projectSequence;
+        const history = this.props.history;
 
         const project_task = {
             "summary": this.state.summary,
@@ -65,7 +65,7 @@ class UpdateProjectTask extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8 m-auto">
-                            <Link to={`/projectBoard/${this.props.project_task.projectIdentifier}`} className="btn btn-light">
+                            <Link to={`/projectBoard/${projectIdentifier}`} className="btn btn-light">
                                 Back to Project Board
                             </Link>
                             <h4 className="display-4 text-center">Update Project Task</h4>

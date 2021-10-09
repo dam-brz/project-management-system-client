@@ -46,7 +46,7 @@ class ProjectBoard extends Component {
                             <br />
                             <hr />
                             <div className="alert alert-info text-center">No Project Tasks on this board</div>
-                        </div>
+                        </div> 
                     )
                 }
             } else {
@@ -59,6 +59,7 @@ class ProjectBoard extends Component {
                             <hr />
                             <Backlog project_tasks_prop={project_tasks}/>
                         </div> 
+                    
                 )
             }
         };
