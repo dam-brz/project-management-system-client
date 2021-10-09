@@ -3,7 +3,7 @@ import { DELETE_PROJECT, GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./type";
 
 export const createProject = (project, history) => async dispatch => {
     try {
-        const res = await axios.post("http://localhost:8080/api/projects", project);
+        await axios.post("http://localhost:8080/api/projects", project);
         history.push("/dashboard")
         dispatch({
             type:GET_ERRORS,
@@ -40,7 +40,7 @@ export const getProject = (projectIdentifier, history) => async dispatch => {
 
 export const updateProject = (projectIdentifier, project, history) => async dispatch => {
     try {
-        const res = await axios.put(`http://localhost:8080/api/projects/${projectIdentifier}`, project);
+        await axios.put(`http://localhost:8080/api/projects/${projectIdentifier}`, project);
         history.push("/dashboard")
         dispatch({
             type:GET_ERRORS,
@@ -56,7 +56,7 @@ export const updateProject = (projectIdentifier, project, history) => async disp
 
 export const deleteProject = (projectIdentifier) => async dispatch => {
     if (window.confirm("Are you sure? This will delete the project and all the data related to it.")) {
-        const res = await axios.delete(`http://localhost:8080/api/projects/${projectIdentifier}`);
+        await axios.delete(`http://localhost:8080/api/projects/${projectIdentifier}`);
     dispatch({
         type:DELETE_PROJECT,
         peyload: projectIdentifier

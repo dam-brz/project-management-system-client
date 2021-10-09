@@ -108,8 +108,7 @@ class AddProject extends Component {
                                     <h6>Start Date</h6>
                                     <input 
                                         type="date"
-                                        className="form-control form-control-lg" 
-                                        name="start_date" 
+                                        className="form-control form-control-lg"
                                         name="startDate" 
                                         value={this.state.startDate} 
                                         onChange={this.onChange}
@@ -120,7 +119,6 @@ class AddProject extends Component {
                                     <input 
                                         type="date"
                                         className="form-control form-control-lg" 
-                                        name="end_date" 
                                         name="endDate" 
                                         value={this.state.endDate}
                                         onChange={this.onChange} 

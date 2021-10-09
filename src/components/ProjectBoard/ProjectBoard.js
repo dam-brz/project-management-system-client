@@ -29,7 +29,6 @@ class ProjectBoard extends Component {
         const {projectIdentifier} = this.props.match.params;
         const {project_tasks} = this.props.backlog;
         const {errors} = this.state;
-        let boardContent;
 
         const boardAlgorithm = (errors, project_tasks) => {
             if (project_tasks.length < 1) {

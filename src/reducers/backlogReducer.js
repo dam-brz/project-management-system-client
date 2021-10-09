@@ -5,7 +5,7 @@ const initialState = {
     project_task: {}
 };
 
-export default function (state=initialState, action) {
+export default function updateState(state=initialState, action) {
     switch(action.type) {
         case GET_BACKLOG :
             return {
