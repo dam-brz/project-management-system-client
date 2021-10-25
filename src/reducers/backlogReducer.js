@@ -26,6 +26,6 @@ export default function updateState(state=initialState, action) {
             }
 
         default :
-        return state;
+            return state;
     }
 }
