@@ -7,12 +7,12 @@ export const createProject = (project, history) => async dispatch => {
         history.push("/dashboard")
         dispatch({
             type:GET_ERRORS,
-            peyload:{}
+            payload:{}
         });
     } catch (error) {
         dispatch({
             type:GET_ERRORS,
-            peyload:error.response.data
+            payload:error.response.data
         });
     }
 };
@@ -44,12 +44,12 @@ export const updateProject = (projectIdentifier, project, history) => async disp
         history.push("/dashboard")
         dispatch({
             type:GET_ERRORS,
-            peyload:{}
+            payload:{}
         });
     } catch (error) {
         dispatch({
             type:GET_ERRORS,
-            peyload:error.response.data
+            payload:error.response.data
         });
     }
 };
@@ -59,7 +59,7 @@ export const deleteProject = (projectIdentifier) => async dispatch => {
         await axios.delete(`http://localhost:8080/api/projects/${projectIdentifier}`);
     dispatch({
         type:DELETE_PROJECT,
-        peyload: projectIdentifier
+        payload: projectIdentifier
     });
     }
 };

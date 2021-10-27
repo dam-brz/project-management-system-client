@@ -8,12 +8,12 @@ export const addProjectTask = (projectIdentifier, projectTask, history) => async
         history.push(`/projectBoard/${projectIdentifier}`);
         dispatch({
             type:GET_ERRORS,
-            peyload:{}
+            payload:{}
         });
     } catch (error) {
         dispatch({
             type: GET_ERRORS,
-            peyload: error.response.data
+            payload: error.response.data
         });
     }
 };
@@ -28,7 +28,7 @@ export const getProjectBacklog = (projectIdentifier, history) => async dispatch 
     } catch (error) {
         dispatch({
             type: GET_ERRORS,
-            peyload: error.response.data
+            payload: error.response.data
         });
     }
     
@@ -44,7 +44,7 @@ export const getProjectTask = (projectIdentifier, projectSequence, history) => a
     } catch (error) {
         dispatch({
             type: GET_ERRORS,
-            peyload: error.response.data
+            payload: error.response.data
         });
         history.push(`/projectBoard/${projectIdentifier}`);
     }
@@ -57,12 +57,12 @@ export const updateProjectTask = (projectIdentifier, project_task, projectSequen
         history.push(`/projectBoard/${projectIdentifier}`);
         dispatch({
             type:GET_ERRORS,
-            peyload:{}
+            payload:{}
         });
     } catch (error) {
         dispatch({
             type:GET_ERRORS,
-            peyload:error.response.data
+            payload:error.response.data
         });
     }
 };
@@ -72,7 +72,7 @@ export const deleteProjectTask = (projectIdentifier, projectSequence) => async d
         await axios.delete(`http://localhost:8080/api/backlogs/${projectIdentifier}/${projectSequence}`);
     dispatch({
         type: DELETE_PROJECT_TASK,
-        peyload: projectSequence
+        payload: projectSequence
     });
     }
 };
