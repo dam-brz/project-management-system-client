@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from "prop-types";
 
 class LandingPage extends Component {
+
+    componentDidMount() {
+        if (this.props.security.validToken) {
+            this.props.history.push("/dashboard");
+        }
+    }
+    
     render() {
         return (
             <div className="landing">
@@ -29,4 +38,12 @@ class LandingPage extends Component {
     }
 }
 
-export default LandingPage;
+LandingPage.propTypes = {
+    security: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    security: state.security
+})
+
+export default connect(mapStateToProps) (LandingPage);
