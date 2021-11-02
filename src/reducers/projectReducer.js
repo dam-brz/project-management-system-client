@@ -21,7 +21,7 @@ export default function updateState(state=initialState, action) {
         case DELETE_PROJECT :
             return {
                 ...state,
-                projects: state.projects.filter(project=>project.projectIdentifier !== action.peyload)
+                projects: state.projects.filter(project=>project.projectIdentifier !== action.payload)
             };
         default :
         return state;
