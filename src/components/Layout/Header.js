@@ -9,7 +9,7 @@ class Header extends Component {
     logout() {
         this.props.logout();
         window.location.href = "/";
-      }
+    }
 
     render() {
         const {validToken, user}  = this.props.security;

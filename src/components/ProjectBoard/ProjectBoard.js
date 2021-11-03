@@ -34,7 +34,13 @@ class ProjectBoard extends Component {
             if (project_tasks.length < 1) {
                 if (errors.projectIdentifier) {
                     return (
-                        <div className="alert alert-danger text-center" role="alert">{errors.projectIdentifier}</div>
+                        <div className="container">
+                            <div className="alert alert-danger text-center" role="alert">{errors.projectIdentifier}</div>
+                            <br />
+                            <Link to="/dashboard" className="btn btn-lg btn-primary">
+                                Back to dashboard 
+                            </Link>
+                        </div>
                     )
                 } else {
                     return(

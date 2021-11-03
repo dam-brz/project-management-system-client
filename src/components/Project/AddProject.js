@@ -31,7 +31,6 @@ class AddProject extends Component {
         }
     }
 
-
     onSubmit(e) {
         e.preventDefault();
         const newProject = {

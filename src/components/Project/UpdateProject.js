@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getProject, updateProject } from '../../actions/projectActions';
+import { getProject, getProjects, updateProject } from '../../actions/projectActions';
 import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import classnames from "classnames";
@@ -22,11 +22,11 @@ class UpdateProject extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.errors) {
-            this.setState({ errors:nextProps.errors })
+    componentWillReceiveProps(props) {
+        if (props.errors) {
+            this.setState({ errors:props.errors })
         }
-        const { projectName , projectIdentifier , description , startDate , endDate } = nextProps.project;
+        const { projectName , projectIdentifier , description , startDate , endDate } = props.project;
         this.setState({ projectName , projectIdentifier , description , startDate , endDate });
     }
 
