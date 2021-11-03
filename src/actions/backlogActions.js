@@ -15,6 +15,10 @@ export const addProjectTask = (projectIdentifier, projectTask, history) => async
             type: GET_ERRORS,
             payload: error.response.data
         });
+
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
 };
 
@@ -30,6 +34,10 @@ export const getProjectBacklog = (projectIdentifier, history) => async dispatch 
             type: GET_ERRORS,
             payload: error.response.data
         });
+
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
     
 };
@@ -47,8 +55,11 @@ export const getProjectTask = (projectIdentifier, projectSequence, history) => a
             payload: error.response.data
         });
         history.push(`/projectBoard/${projectIdentifier}`);
+
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
-    
 };
 
 export const updateProjectTask = (projectIdentifier, project_task, projectSequence, history) => async dispatch => {
@@ -64,15 +75,25 @@ export const updateProjectTask = (projectIdentifier, project_task, projectSequen
             type:GET_ERRORS,
             payload:error.response.data
         });
+
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
 };
 
 export const deleteProjectTask = (projectIdentifier, projectSequence) => async dispatch => {
-    if (window.confirm("Are you sure? This will delete the project task and all the data related to it.")) {
-        await axios.delete(`http://localhost:8080/api/backlogs/${projectIdentifier}/${projectSequence}`);
-    dispatch({
-        type: DELETE_PROJECT_TASK,
-        payload: projectSequence
-    });
+    try {
+        if (window.confirm("Are you sure? This will delete the project task and all the data related to it.")) {
+            await axios.delete(`http://localhost:8080/api/backlogs/${projectIdentifier}/${projectSequence}`);
+        dispatch({
+            type: DELETE_PROJECT_TASK,
+            payload: projectSequence
+        });
+        }
+    } catch (error) {
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
 };

@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 class Dashboar extends Component {
     
     componentDidMount() {
-        this.props.getProjects();
+        this.props.getProjects(this.props.history);
     }
 
     render() {

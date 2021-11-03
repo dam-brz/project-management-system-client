@@ -14,15 +14,26 @@ export const createProject = (project, history) => async dispatch => {
             type:GET_ERRORS,
             payload:error.response.data
         });
+
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
 };
 
-export const getProjects = () => async dispatch => {
-    const res = await axios.get("http://localhost:8080/api/projects");
-    dispatch({
-        type: GET_PROJECTS,
-        payload: res.data
-    });
+export const getProjects = (history) => async dispatch => {
+    
+    try {
+        const res = await axios.get("http://localhost:8080/api/projects");
+        dispatch({
+            type: GET_PROJECTS,
+            payload: res.data
+        });
+    } catch (error) {
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }    
+    }
 };
 
 export const getProject = (projectIdentifier, history) => async dispatch => {
@@ -34,6 +45,9 @@ export const getProject = (projectIdentifier, history) => async dispatch => {
         });
     } catch (error) {
         history.push("/dashboard")
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
     
 };
@@ -51,15 +65,24 @@ export const updateProject = (projectIdentifier, project, history) => async disp
             type:GET_ERRORS,
             payload:error.response.data
         });
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
 };
 
 export const deleteProject = (projectIdentifier) => async dispatch => {
-    if (window.confirm("Are you sure? This will delete the project and all the data related to it.")) {
-        await axios.delete(`http://localhost:8080/api/projects/${projectIdentifier}`);
-    dispatch({
-        type:DELETE_PROJECT,
-        payload: projectIdentifier
-    });
+     try {
+        if (window.confirm("Are you sure? This will delete the project and all the data related to it.")) {
+            await axios.delete(`http://localhost:8080/api/projects/${projectIdentifier}`);
+            dispatch({
+                type:DELETE_PROJECT,
+                payload: projectIdentifier
+            });
+        }
+     } catch (error) {
+        if (error.response.status === 401) {
+            window.location = "/login"
+        }
     }
 };

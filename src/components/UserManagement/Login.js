@@ -29,15 +29,15 @@ class Login extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProrps) {
-        if(nextProrps.security.validToken) {
+    componentDidUpdate() {
+        if(this.props.security.validToken) {
             this.props.history.push("/dashboard");
         }
+    }
 
-        if (nextProrps.errors) {
-            this.setState({
-                errors: nextProrps.errors
-            })
+    static getDerivedStateFromProps(props, state) {
+        if (state.errors) {
+             return { errors: props.errors }
         }
     }
 
