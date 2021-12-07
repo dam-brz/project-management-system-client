@@ -27,19 +27,17 @@ class Login extends Component {
         if (this.props.security.validToken) {
             this.props.history.push("/dashboard");
         }
-    }
+     }
 
-    componentDidUpdate() {
-        if(this.props.security.validToken) {
-            this.props.history.push("/dashboard");
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.security.validToken) {
+          this.props.history.push("/dashboard");
         }
-    }
-
-    static getDerivedStateFromProps(props, state) {
-        if (state.errors) {
-             return { errors: props.errors }
+    
+        if (nextProps.errors) {
+          this.setState({ errors: nextProps.errors });
         }
-    }
+      }
 
     onSubmit(e) {
         e.preventDefault();
@@ -52,6 +50,13 @@ class Login extends Component {
 
     render() {
         const {errors} = this.state;
+        let passwordErrors;
+
+        if (errors.password) {
+            passwordErrors  = errors.password.toString().split(',');
+        } else {
+            passwordErrors = [];
+        }
         return (
             <div className="login">
                 <div className="container">
@@ -94,11 +99,11 @@ class Login extends Component {
                                         value={this.state.password}
                                         onChange={this.onChange}  
                                     />
-                                    {errors.password && (
+                                    {errors.password && passwordErrors.map((pwe) =>  
                                         <div className="invalid-feedback">
-                                            {errors.password}
+                                            {pwe}
                                         </div>
-                                    )}
+                                    )} 
                                 </div>
                                 <div className="row">
                                     <div className="col"></div>

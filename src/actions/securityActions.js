@@ -24,13 +24,15 @@ export const login = LoginReques => async dispatch =>{
     try {
         const res = await axios.post("http://localhost:8080/api/users/login", LoginReques);
         const { token } = res.data;
+        const { roles } = res.data;
         localStorage.setItem("jwtToken", token);
         setJWToken(token);
         const decoded = jwt_decode(token);
         dispatch({
             type: SET_CURRENT_USER,
-            payload: decoded
-        })
+            payload: decoded,
+            roles: roles
+        });
     } catch (error) {
         dispatch({
             type:GET_ERRORS,
