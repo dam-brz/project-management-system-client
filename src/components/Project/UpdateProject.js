@@ -119,11 +119,18 @@ class UpdateProject extends Component {
                                     <h6>Estimated End Date</h6>
                                     <input 
                                         type="date" 
-                                        className="form-control form-control-lg" 
+                                        className={classnames("form-control form-control-lg ", {
+                                            "is-invalid": errors.endDate || errors.date
+                                        })}
                                         name="endDate"
                                         value={this.state.endDate || ""}
                                         onChange={this.onChange} 
                                     />
+                                    {errors.date && (
+                                        <div className="invalid-feedback">
+                                            {errors.date}
+                                        </div>
+                                    )}
                                 </div>
                                 <input 
                                     type="submit" 

@@ -104,7 +104,7 @@ class UpdateProjectTask extends Component {
                                         type="date" 
                                         className="form-control form-control-lg" 
                                         name="dueDate"
-                                        value={this.state.dueDate || ""} 
+                                        value={this.state.dueDate.slice(0, 10) || ""} 
                                         onChange={this.onChange}
                                     />
                                 </div>

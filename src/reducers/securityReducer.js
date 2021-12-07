@@ -2,7 +2,8 @@ import { SET_CURRENT_USER } from "../actions/type";
 
 const initialState = {
     user: {},
-    validToken: false
+    validToken: false,
+    roles:{}
 };
 
 const isTokenValidated = (payload) => {
@@ -19,7 +20,8 @@ export default function updateState(state=initialState, action) {
             return {
                 ...state,
                 validToken: isTokenValidated(action.payload), 
-                user: action.payload
+                user: action.payload,
+                roles: action.roles
             };
 
         default :

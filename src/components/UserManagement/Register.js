@@ -31,9 +31,9 @@ class Register extends Component {
         this.setState({ [e.target.name] : e.target.value})
     };
 
-    static getDerivedStateFromProps(props, state) {
-        if (state.errors) {
-             return { errors: props.errors }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+          this.setState({ errors: nextProps.errors });
         }
     }
 
@@ -50,6 +50,17 @@ class Register extends Component {
 
     render() {
         const {errors} = this.state;
+        let passwordErrors;
+        let confirmPasswordErrors;
+
+        if (errors.password) {
+            passwordErrors  = errors.password.toString().split(',');
+            confirmPasswordErrors  = errors.password.toString().split(',');
+        } else {
+            passwordErrors = [];
+            confirmPasswordErrors = [];
+        }
+
         return (
             <div className="register">
                 <div className="container">
@@ -67,7 +78,7 @@ class Register extends Component {
                                         placeholder="Full name" 
                                         name="fullName"
                                         value={this.state.fullName}
-                                        onChange={this.onChange} 
+                                        onChange={this.onChange}
                                     />
                                     {errors.fullName && (
                                         <div className="invalid-feedback">
@@ -101,13 +112,13 @@ class Register extends Component {
                                         placeholder="Password" 
                                         name="password"
                                         value={this.state.password}
-                                        onChange={this.onChange} 
+                                        onChange={this.onChange}
                                     />
-                                    {errors.password && (
+                                    {errors.password && passwordErrors.map((pwe) =>  
                                         <div className="invalid-feedback">
-                                            {errors.password}
+                                            {pwe}
                                         </div>
-                                    )}
+                                    )}       
                                 </div>
                                 <div className="form-group">
                                     <input 
@@ -120,9 +131,9 @@ class Register extends Component {
                                         value={this.state.confirmPassword}
                                         onChange={this.onChange} 
                                     />
-                                    {errors.confirmPassword && (
+                                    {errors.confirmPassword && confirmPasswordErrors.map((cpwe) =>  
                                         <div className="invalid-feedback">
-                                            {errors.confirmPassword}
+                                            {cpwe}
                                         </div>
                                     )}
                                 </div>

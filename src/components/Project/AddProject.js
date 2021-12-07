@@ -25,9 +25,9 @@ class AddProject extends Component {
         this.setState({ [e.target.name] : e.target.value})
     };
 
-    static getDerivedStateFromProps(props, state) {
-        if (state.errors) {
-             return { errors: props.errors }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+          this.setState({ errors: nextProps.errors });
         }
     }
 
@@ -107,21 +107,45 @@ class AddProject extends Component {
                                     <h6>Start Date</h6>
                                     <input 
                                         type="date"
-                                        className="form-control form-control-lg"
+                                        className={classnames("form-control form-control-lg ", {
+                                            "is-invalid": errors.startDate || errors.date
+                                        })} 
                                         name="startDate" 
                                         value={this.state.startDate} 
                                         onChange={this.onChange}
                                     />
+                                    {errors.startDate && (
+                                        <div className="invalid-feedback">
+                                            {errors.startDate}
+                                        </div>
+                                    )}
+                                    {errors.date && (
+                                        <div className="invalid-feedback">
+                                            {errors.date}
+                                        </div>
+                                    )}
                                 </div>
                                 <div className="form-group my-2">
                                     <h6>Estimated End Date</h6>
                                     <input 
                                         type="date"
-                                        className="form-control form-control-lg" 
+                                        className={classnames("form-control form-control-lg ", {
+                                            "is-invalid": errors.endDate || errors.date
+                                        })}
                                         name="endDate" 
                                         value={this.state.endDate}
                                         onChange={this.onChange} 
                                     />
+                                    {errors.endDate && (
+                                        <div className="invalid-feedback">
+                                            {errors.endDate}
+                                        </div>
+                                    )}
+                                    {errors.date && (
+                                        <div className="invalid-feedback">
+                                            {errors.date}
+                                        </div>
+                                    )}
                                 </div>
 
                                 <button type="submit" className="btn btn-primary btn-block mt-4">Submit</button>
